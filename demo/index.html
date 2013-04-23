@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- saved from url=(0014)about:internet -->
+		<style type="text/css">
+			ul , li{
+				display:list-item;
+				list-style: none;
+			}
+
+			.antherli , .firstLi , .lastLi{
+				height:24px;
+				line-height: 24px;
+				cursor : pointer;	
+				padding : 10px 10px;
+			} 
+
+			.antherli {
+				border-top: 1px solid #f8f8f8 ;
+				border-bottom: 1px solid #c0bbb5 ;
+			}
+
+			.firstLi {
+				border-bottom: 1px solid #c0bbb5 ;
+			}
+
+			.lastLi {
+				border-top: 1px solid #f8f8f8 ;
+			}
+
+			ul a{
+				background: url("") no-repeat;
+				color : #606566 ;
+				/*color:#606566 ; */
+			}
+
+			ul a:link {
+				color : #606566;
+			}
+
+			ul a:hover {
+				color:#FF5F3E;
+			}
+
+			.nav-list {
+				padding : 5px 0px;
+				font: 12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
+				border-radius:5px;
+				border: 1px solid  #c0bbb5;
+				background:#e2e2e2;
+			}
+
+
+			.left-nav {
+				top : 35%;
+				position: fixed;
+				padding : 5px 0px;
+				width :120px;
+			}
+
+			.open-nav{
+				width:0px; 
+				height:0px; 
+				border-bottom:10px solid transparent; 
+				border-top:10px solid transparent; 
+				border-left:10px solid #2f2f2f; 
+				font-size:0px;
+				line-height:0px;
+				position: absolute ;
+				top : 48%;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="leftNav" class="left-nav" style="display: block; left: -120px;">
+			<ul id="nav" class="nav-list">
+				<a href="#collpasePanel_0"><li class="firstLi">SR</li></a>
+				<a href="#collpasePanel_1"><li class="lastLi">核心路由器(CR)</li></a>
+				<a href="#collpasePanel_1"><li class="lastLi">BRS</li></a>
+			</ul>
+		</div>
+		<div id="openNav" class="open-nav" style="left:0px;"></div>
+		<script type="text/javascript">
+			(function (){
+				var openDiv = $("openNav"),
+					nav = $("leftNav"),
+					con = $("navContainor"),
+					w = 0;
+
+				openDiv.onmouseover = openNav;
+				nav.onmouseout = closeNav;
+
+				function $(id){
+					return document.getElementById(id);
+				}
+
+				function openNav (){
+					w = nav.style.pixelLeft;
+					if(w < 0){
+						open();
+					}
+				}
+
+				function open(){
+					w += 30;
+					nav.style.left = w + "px";
+
+					var oLeft = openDiv.style.pixelLeft;
+					openDiv.style.left = (oLeft + 30) + "px";
+					if(w < 0){
+						setTimeout(arguments.callee , 10);
+					}
+				}
+
+				function closeNav(e){
+					var _target = e.target || e.srcElement,
+					    nodeName = _target && _target.nodeName.toLowerCase();
+
+					if(nodeName === "div"){
+						close();
+					}
+				}
+
+				function close(){
+					w = nav.style.pixelLeft;
+					w -= 30;
+					nav.style.left = w + "px";
+
+					var oLeft = openDiv.style.pixelLeft;
+					if(oLeft != 0){
+						openDiv.style.left = (oLeft - 30) + "px";
+					}
+
+					if(w > -120){
+						setTimeout(arguments.callee , 10);
+					}
+				}
+			})();
+
+		</script>
+	</body>
+</html>
